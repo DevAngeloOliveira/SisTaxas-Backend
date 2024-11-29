@@ -1,6 +1,6 @@
 # SisTaxas - API
 
-API REST para gerenciamento de taxas municipais, desenvolvida com Node.js, Express e SQLite.
+API REST do SisTaxas.
 
 ## 🚀 Tecnologias
 
