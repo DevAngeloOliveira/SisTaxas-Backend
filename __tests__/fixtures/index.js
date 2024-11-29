@@ -13,7 +13,7 @@ const createUsuario = async (idEmpresa) => {
   return await Usuario.create({
     usuario: faker.person.fullName(),
     CPF: faker.string.numeric(11),
-    login: faker.internet.username(),
+    login: faker.internet.userName().toLowerCase(),
     senha: await bcrypt.hash('123456', 8),
     idEmpresa
   });
@@ -69,7 +69,7 @@ const generateToken = (usuario) => {
   const jwt = require('jsonwebtoken');
   return jwt.sign(
     { id: usuario.id, idEmpresa: usuario.idEmpresa },
-    process.env.JWT_SECRET || 'sistaxas2024',
+    process.env.JWT_SECRET || 'sistaxas2024test',
     { expiresIn: '1d' }
   );
 };

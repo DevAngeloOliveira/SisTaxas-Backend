@@ -13,43 +13,40 @@ const routes = new Router();
 // Rotas públicas
 routes.post('/login', AuthController.login);
 
-// Middleware de autenticação
-routes.use(authMiddleware);
-
 // Rotas protegidas
 // Usuários
-routes.get('/usuarios', UsuarioController.index);
-routes.post('/usuarios', UsuarioController.store);
-routes.put('/usuarios/:id', UsuarioController.update);
-routes.delete('/usuarios/:id', UsuarioController.delete);
+routes.get('/usuarios', authMiddleware, UsuarioController.index);
+routes.post('/usuarios', authMiddleware, UsuarioController.store);
+routes.put('/usuarios/:id', authMiddleware, UsuarioController.update);
+routes.delete('/usuarios/:id', authMiddleware, UsuarioController.delete);
 
 // Empresas
-routes.get('/empresas', EmpresaController.index);
-routes.post('/empresas', EmpresaController.store);
-routes.put('/empresas/:id', EmpresaController.update);
-routes.delete('/empresas/:id', EmpresaController.delete);
+routes.get('/empresas', authMiddleware, EmpresaController.index);
+routes.post('/empresas', authMiddleware, EmpresaController.store);
+routes.put('/empresas/:id', authMiddleware, EmpresaController.update);
+routes.delete('/empresas/:id', authMiddleware, EmpresaController.delete);
 
 // Contribuintes
-routes.get('/contribuintes', ContribuinteController.index);
-routes.post('/contribuintes', ContribuinteController.store);
-routes.put('/contribuintes/:id', ContribuinteController.update);
-routes.delete('/contribuintes/:id', ContribuinteController.delete);
+routes.get('/contribuintes', authMiddleware, ContribuinteController.index);
+routes.post('/contribuintes', authMiddleware, ContribuinteController.store);
+routes.put('/contribuintes/:id', authMiddleware, ContribuinteController.update);
+routes.delete('/contribuintes/:id', authMiddleware, ContribuinteController.delete);
 
 // Taxas
-routes.get('/taxas', TaxaController.index);
-routes.post('/taxas', TaxaController.store);
-routes.put('/taxas/:id', TaxaController.update);
-routes.delete('/taxas/:id', TaxaController.delete);
+routes.get('/taxas', authMiddleware, TaxaController.index);
+routes.post('/taxas', authMiddleware, TaxaController.store);
+routes.put('/taxas/:id', authMiddleware, TaxaController.update);
+routes.delete('/taxas/:id', authMiddleware, TaxaController.delete);
 
 // Usuário-Taxa
-routes.get('/usuario-taxas', UsuarioTaxaController.index);
-routes.post('/usuario-taxas', UsuarioTaxaController.store);
-routes.delete('/usuario-taxas/:id', UsuarioTaxaController.delete);
+routes.get('/usuario-taxas', authMiddleware, UsuarioTaxaController.index);
+routes.post('/usuario-taxas', authMiddleware, UsuarioTaxaController.store);
+routes.delete('/usuario-taxas/:id', authMiddleware, UsuarioTaxaController.delete);
 
 // Financeiro
-routes.get('/financeiro', FinanceiroController.index);
-routes.post('/financeiro', FinanceiroController.store);
-routes.put('/financeiro/:id', FinanceiroController.update);
-routes.delete('/financeiro/:id', FinanceiroController.delete);
+routes.get('/financeiro', authMiddleware, FinanceiroController.index);
+routes.post('/financeiro', authMiddleware, FinanceiroController.store);
+routes.put('/financeiro/:id', authMiddleware, FinanceiroController.update);
+routes.delete('/financeiro/:id', authMiddleware, FinanceiroController.delete);
 
 module.exports = routes; 

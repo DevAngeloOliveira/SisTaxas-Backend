@@ -1,4 +1,5 @@
-module.exports = {
+/** @type {import('jest').Config} */
+const config = {
   testEnvironment: 'node',
   testMatch: ['**/__tests__/**/*.test.js'],
   clearMocks: true,
@@ -14,5 +15,11 @@ module.exports = {
     'NODE_ENV': 'test'
   },
   testPathIgnorePatterns: ['/node_modules/'],
-  verbose: true
-}; 
+  verbose: true,
+  forceExit: true,
+  clearMocks: true,
+  resetMocks: true,
+  restoreMocks: true
+};
+
+module.exports = config; 

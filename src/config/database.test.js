@@ -1,14 +1,6 @@
 const { Sequelize } = require('sequelize');
+const config = require('./test');
 
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: ':memory:',
-  logging: false,
-  define: {
-    timestamps: true,
-    underscored: true,
-    underscoredAll: true
-  }
-});
+const sequelize = new Sequelize(config.database);
 
 module.exports = sequelize; 

@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>55/55</span>
+                <span class='fraction'>52/52</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>55/55</span>
+                <span class='fraction'>52/52</span>
             </div>
         
             
@@ -114,13 +114,7 @@
 <a name='L49'></a><a href='#L49'>49</a>
 <a name='L50'></a><a href='#L50'>50</a>
 <a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -186,44 +180,41 @@ const routes = new Router();
 // Rotas públicas
 routes.post('/login', AuthController.login);
 &nbsp;
-// Middleware de autenticação
-routes.use(authMiddleware);
-&nbsp;
 // Rotas protegidas
 // Usuários
-routes.get('/usuarios', UsuarioController.index);
-routes.post('/usuarios', UsuarioController.store);
-routes.put('/usuarios/:id', UsuarioController.update);
-routes.delete('/usuarios/:id', UsuarioController.delete);
+routes.get('/usuarios', authMiddleware, UsuarioController.index);
+routes.post('/usuarios', authMiddleware, UsuarioController.store);
+routes.put('/usuarios/:id', authMiddleware, UsuarioController.update);
+routes.delete('/usuarios/:id', authMiddleware, UsuarioController.delete);
 &nbsp;
 // Empresas
-routes.get('/empresas', EmpresaController.index);
-routes.post('/empresas', EmpresaController.store);
-routes.put('/empresas/:id', EmpresaController.update);
-routes.delete('/empresas/:id', EmpresaController.delete);
+routes.get('/empresas', authMiddleware, EmpresaController.index);
+routes.post('/empresas', authMiddleware, EmpresaController.store);
+routes.put('/empresas/:id', authMiddleware, EmpresaController.update);
+routes.delete('/empresas/:id', authMiddleware, EmpresaController.delete);
 &nbsp;
 // Contribuintes
-routes.get('/contribuintes', ContribuinteController.index);
-routes.post('/contribuintes', ContribuinteController.store);
-routes.put('/contribuintes/:id', ContribuinteController.update);
-routes.delete('/contribuintes/:id', ContribuinteController.delete);
+routes.get('/contribuintes', authMiddleware, ContribuinteController.index);
+routes.post('/contribuintes', authMiddleware, ContribuinteController.store);
+routes.put('/contribuintes/:id', authMiddleware, ContribuinteController.update);
+routes.delete('/contribuintes/:id', authMiddleware, ContribuinteController.delete);
 &nbsp;
 // Taxas
-routes.get('/taxas', TaxaController.index);
-routes.post('/taxas', TaxaController.store);
-routes.put('/taxas/:id', TaxaController.update);
-routes.delete('/taxas/:id', TaxaController.delete);
+routes.get('/taxas', authMiddleware, TaxaController.index);
+routes.post('/taxas', authMiddleware, TaxaController.store);
+routes.put('/taxas/:id', authMiddleware, TaxaController.update);
+routes.delete('/taxas/:id', authMiddleware, TaxaController.delete);
 &nbsp;
 // Usuário-Taxa
-routes.get('/usuario-taxas', UsuarioTaxaController.index);
-routes.post('/usuario-taxas', UsuarioTaxaController.store);
-routes.delete('/usuario-taxas/:id', UsuarioTaxaController.delete);
+routes.get('/usuario-taxas', authMiddleware, UsuarioTaxaController.index);
+routes.post('/usuario-taxas', authMiddleware, UsuarioTaxaController.store);
+routes.delete('/usuario-taxas/:id', authMiddleware, UsuarioTaxaController.delete);
 &nbsp;
 // Financeiro
-routes.get('/financeiro', FinanceiroController.index);
-routes.post('/financeiro', FinanceiroController.store);
-routes.put('/financeiro/:id', FinanceiroController.update);
-routes.delete('/financeiro/:id', FinanceiroController.delete);
+routes.get('/financeiro', authMiddleware, FinanceiroController.index);
+routes.post('/financeiro', authMiddleware, FinanceiroController.store);
+routes.put('/financeiro/:id', authMiddleware, FinanceiroController.update);
+routes.delete('/financeiro/:id', authMiddleware, FinanceiroController.delete);
 &nbsp;
 module.exports = routes; </pre></td></tr></table></pre>
 
@@ -232,7 +223,7 @@ module.exports = routes; </pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-11-29T13:11:46.787Z
+                at 2024-11-29T13:34:01.570Z
             </div>
         <script src="../prettify.js"></script>
         <script>
