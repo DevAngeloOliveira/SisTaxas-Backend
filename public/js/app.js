@@ -1,102 +1,67 @@
-// Navegação
-function initNavigation() {
-    document.querySelectorAll('.nav-link[data-page]').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const page = e.target.dataset.page;
-            showPage(page);
+document.addEventListener('DOMContentLoaded', async () => {
+    // Carregar dados iniciais
+    if (localStorage.getItem('token')) {
+        await loadEmpresas();
+        await loadUsuarios();
+        await loadContribuintes();
+        await loadTaxas();
+    }
+
+    // Configurar eventos das tabs
+    const tabs = document.querySelectorAll('button[data-bs-toggle="tab"]');
+    tabs.forEach(tab => {
+        tab.addEventListener('shown.bs.tab', async (e) => {
+            const target = e.target.getAttribute('data-bs-target');
+            switch (target) {
+                case '#empresasTab':
+                    await loadEmpresas();
+                    break;
+                case '#usuariosTab':
+                    await loadUsuarios();
+                    break;
+                case '#contribuintesTab':
+                    await loadContribuintes();
+                    break;
+                case '#taxasTab':
+                    await loadTaxas();
+                    break;
+            }
         });
     });
-}
 
-function showPage(page) {
-    // Esconder todas as páginas
-    document.querySelectorAll('.content-page').forEach(p => {
-        p.classList.add('d-none');
-    });
+    // Configurar formulários
+    const forms = {
+        empresa: document.getElementById('empresaForm'),
+        usuario: document.getElementById('usuarioForm'),
+        contribuinte: document.getElementById('contribuinteForm'),
+        taxa: document.getElementById('taxaForm')
+    };
 
-    // Mostrar a página selecionada
-    document.getElementById(`${page}Page`).classList.remove('d-none');
-
-    // Carregar dados da página
-    switch (page) {
-        case 'empresas':
-            loadEmpresas();
-            break;
-        case 'usuarios':
-            loadUsuarios();
-            break;
-        case 'contribuintes':
-            loadContribuintes();
-            break;
-        case 'taxas':
-            loadTaxas();
-            break;
+    // Empresa Form
+    if (forms.empresa) {
+        forms.empresa.addEventListener('submit', handleEmpresaSubmit);
     }
-}
 
-// Função para atualizar selects de empresa
-function updateEmpresaSelect(selectId) {
-    const select = document.getElementById(selectId);
-    if (select && window.empresas) {
-        select.innerHTML = window.empresas.map(empresa => 
-            `<option value="${empresa.id}">${empresa.empresa}</option>`
-        ).join('');
+    // Usuario Form
+    if (forms.usuario) {
+        forms.usuario.addEventListener('submit', handleUsuarioSubmit);
     }
-}
 
-// Inicialização
-document.addEventListener('DOMContentLoaded', () => {
-    // Inicializar navegação
-    initNavigation();
-
-    // Inicializar modais
-    const modalTypes = ['empresa', 'usuario', 'contribuinte', 'taxa'];
-    
-    // Criar instâncias dos modais
-    window.modals = modalTypes.reduce((acc, type) => {
-        const modalElement = document.getElementById(`${type}Modal`);
-        if (modalElement) {
-            acc[type] = new bootstrap.Modal(modalElement, {
-                backdrop: 'static',
-                keyboard: false
-            });
-        }
-        return acc;
-    }, {});
-
-    // Configurar eventos dos modais
-    modalTypes.forEach(type => {
-        const modalElement = document.getElementById(`${type}Modal`);
-        const form = document.getElementById(`${type}Form`);
-        
-        if (modalElement && form) {
-            const firstInput = form.querySelector('input:not([type="hidden"])');
-
-            // Quando o modal abrir, focar no primeiro campo
-            modalElement.addEventListener('shown.bs.modal', () => {
-                if (firstInput) firstInput.focus();
-            });
-
-            // Quando o modal fechar, limpar o formulário
-            modalElement.addEventListener('hidden.bs.modal', () => {
-                form.reset();
-                const idInput = form.querySelector('input[type="hidden"]');
-                if (idInput) idInput.value = '';
-            });
-
-            // Antes de fechar o modal, remover o foco
-            modalElement.addEventListener('hide.bs.modal', () => {
-                if (document.activeElement) document.activeElement.blur();
-            });
-        }
-    });
-
-    // Verificar autenticação e mostrar conteúdo principal
-    const token = localStorage.getItem('token');
-    if (token) {
-        document.getElementById('loginForm').classList.add('d-none');
-        document.getElementById('mainContent').classList.remove('d-none');
-        loadEmpresas();
+    // Contribuinte Form
+    if (forms.contribuinte) {
+        forms.contribuinte.addEventListener('submit', handleContribuinteSubmit);
     }
+
+    // Taxa Form
+    if (forms.taxa) {
+        forms.taxa.addEventListener('submit', handleTaxaSubmit);
+    }
+
+    // Configurar modals
+    window.modals = {
+        empresa: new bootstrap.Modal(document.getElementById('empresaModal')),
+        usuario: new bootstrap.Modal(document.getElementById('usuarioModal')),
+        contribuinte: new bootstrap.Modal(document.getElementById('contribuinteModal')),
+        taxa: new bootstrap.Modal(document.getElementById('taxaModal'))
+    };
 }); 

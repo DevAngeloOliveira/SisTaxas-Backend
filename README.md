@@ -1,9 +1,10 @@
-# SisTaxas - API
+# SisTaxas
 
-API REST do SisTaxas.
+Sistema completo de gerenciamento de taxas municipais.
 
 ## 🚀 Tecnologias
 
+### Backend
 - Node.js
 - Express
 - Sequelize (ORM)
@@ -12,10 +13,18 @@ API REST do SisTaxas.
 - Yup para validação
 - BCrypt para criptografia
 
+### Frontend
+- HTML5
+- CSS3 com Bootstrap 5
+- JavaScript (ES6+)
+- Bootstrap Icons
+- Layout responsivo
+
 ## 📋 Pré-requisitos
 
 - Node.js (versão 14 ou superior)
 - NPM ou Yarn
+- Navegador moderno com suporte a ES6+
 
 ## 🔧 Instalação
 
@@ -36,151 +45,99 @@ npm run dev
 
 O servidor estará rodando em `http://localhost:5000`
 
-## 🔑 Autenticação
-
-A API utiliza JWT (JSON Web Token) para autenticação. Para acessar as rotas protegidas, é necessário:
-
-1. Fazer login e obter o token
-2. Incluir o token no header das requisições:
-```
-Authorization: Bearer [seu-token]
-```
-
-## 📚 Endpoints
+## ✨ Funcionalidades
 
 ### Autenticação
-- **POST** `/api/login`
-  ```json
-  {
-    "login": "seu_login",
-    "senha": "sua_senha"
-  }
-  ```
+- Login seguro com JWT
+- Proteção de rotas
+- Gerenciamento de sessão
+- Logout automático
+
+### Interface do Usuário
+- Design moderno e responsivo
+- Tema personalizado com cores da Eticons
+- Navegação intuitiva por abas
+- Feedback visual para todas as ações
+- Contadores automáticos de registros
+- Formulários com validação em tempo real
 
 ### Empresas
-- **GET** `/api/empresas` - Lista todas as empresas
-- **POST** `/api/empresas` - Cria uma nova empresa
-  ```json
-  {
-    "CNPJ": "12345678901234",
-    "empresa": "Nome da Empresa"
-  }
-  ```
-- **PUT** `/api/empresas/:id` - Atualiza uma empresa
-- **DELETE** `/api/empresas/:id` - Remove uma empresa
+- Cadastro e gerenciamento de empresas
+- Listagem com busca e ordenação
+- CRUD completo com validações
+- Associação automática com usuários
 
 ### Usuários
-- **GET** `/api/usuarios` - Lista usuários da empresa
-- **POST** `/api/usuarios` - Cria um novo usuário
-  ```json
-  {
-    "usuario": "Nome do Usuário",
-    "CPF": "12345678901",
-    "login": "login_usuario",
-    "senha": "senha123",
-    "idEmpresa": 1
-  }
-  ```
-- **PUT** `/api/usuarios/:id` - Atualiza um usuário
-- **DELETE** `/api/usuarios/:id` - Remove um usuário
+- Gerenciamento de usuários por empresa
+- Controle de acesso e permissões
+- Senhas criptografadas
+- Validação de CPF e dados pessoais
 
 ### Contribuintes
-- **GET** `/api/contribuintes` - Lista contribuintes da empresa
-- **POST** `/api/contribuintes` - Cadastra um novo contribuinte
-  ```json
-  {
-    "CPF": "12345678901",
-    "nome": "Nome do Contribuinte",
-    "idEmpresa": 1
-  }
-  ```
-- **PUT** `/api/contribuintes/:id` - Atualiza um contribuinte
-- **DELETE** `/api/contribuintes/:id` - Remove um contribuinte
+- Cadastro completo de contribuintes
+- Vinculação com empresa
+- Validação de documentos
+- Histórico de taxas e pagamentos
 
 ### Taxas
-- **GET** `/api/taxas` - Lista taxas da empresa
-- **POST** `/api/taxas` - Cadastra uma nova taxa
-  ```json
-  {
-    "codigo": "TAXA001",
-    "taxa": "Nome da Taxa",
-    "valor": 100.00,
-    "idEmpresa": 1,
-    "exercicio": 2024
-  }
-  ```
-- **PUT** `/api/taxas/:id` - Atualiza uma taxa
-- **DELETE** `/api/taxas/:id` - Remove uma taxa
-
-### Usuário-Taxa
-- **GET** `/api/usuario-taxas` - Lista relações usuário-taxa
-- **POST** `/api/usuario-taxas` - Cria uma relação usuário-taxa
-  ```json
-  {
-    "idUsuario": 1,
-    "idTaxa": 1,
-    "idEmpresa": 1,
-    "exercicio": 2024
-  }
-  ```
-- **DELETE** `/api/usuario-taxas/:id` - Remove uma relação
+- Cadastro e configuração de taxas
+- Definição de valores e exercícios
+- Vinculação com empresas e usuários
+- Geração automática de códigos
 
 ### Financeiro
-- **GET** `/api/financeiro` - Lista lançamentos financeiros
-- **POST** `/api/financeiro` - Cria um lançamento financeiro
-  ```json
-  {
-    "idCPF": "12345678901",
-    "vencimento": "2024-12-31",
-    "descricao": "Descrição do Lançamento",
-    "valor": 100.00,
-    "desconto": 0,
-    "codigoTaxa": "TAXA001",
-    "exercicio": 2024,
-    "valorTotal": 100.00,
-    "codigoBarra": "123456789",
-    "linhaDigitavel": "123456789",
-    "usuario": 1,
-    "empresa": 1
-  }
-  ```
-- **PUT** `/api/financeiro/:id` - Atualiza um lançamento
-- **DELETE** `/api/financeiro/:id` - Remove um lançamento
+- Lançamentos financeiros
+- Controle de vencimentos
+- Cálculo automático de valores
+- Geração de códigos de barras
+- Relatórios e extratos
 
-## 🔒 Segurança
-
+### Segurança
 - Todas as senhas são criptografadas usando BCrypt
 - Autenticação via JWT
 - Validação de dados com Yup
 - Separação por empresa (multi-tenant)
 - Verificações de autorização em todas as operações
 
+### Interface Responsiva
+- Layout adaptável a diferentes dispositivos
+- Menus colapsáveis
+- Tabelas responsivas
+- Formulários otimizados para mobile
+
+### Experiência do Usuário
+- Mensagens de feedback para todas as ações
+- Confirmações antes de exclusões
+- Indicadores de carregamento
+- Contadores automáticos
+- Formulários inteligentes com autopreenchimento
+- Validações em tempo real
+
 ## 🏗 Estrutura do Projeto
 
 ```
 src/
-  ├── config/
-  │   └── database.js
-  ├── controllers/
-  │   ├── AuthController.js
-  │   ├── UsuarioController.js
-  │   ├── EmpresaController.js
-  │   ├── ContribuinteController.js
-  │   ├── TaxaController.js
-  │   ├── UsuarioTaxaController.js
-  │   └── FinanceiroController.js
-  ├── middlewares/
-  │   └── auth.js
-  ├── models/
-  │   ├── Usuario.js
-  │   ├── Empresa.js
-  │   ├── Contribuinte.js
-  │   ├── Taxa.js
-  │   ├── UsuarioTaxa.js
-  │   ├── Financeiro.js
-  │   └── index.js
-  ├── routes.js
-  └── app.js
+  ├── backend/
+  │   ├── config/
+  │   ├── controllers/
+  │   ├── middlewares/
+  │   ├── models/
+  │   ├── routes.js
+  │   └── app.js
+  │
+  └── public/
+      ├── css/
+      │   └── styles.css
+      ├── js/
+      │   ├── api.js
+      │   ├── auth.js
+      │   ├── app.js
+      │   └── handlers/
+      │       ├── empresa.js
+      │       ├── usuario.js
+      │       ├── contribuinte.js
+      │       └── taxa.js
+      └── index.html
 ```
 
 ## 🧪 Testes
@@ -193,14 +150,3 @@ npm test
 ## 📝 Licença
 
 Este projeto está sob a licença ISC.
-
-## ✨ Funcionalidades
-
-- Multi-tenant (separação por empresa)
-- Autenticação e autorização
-- CRUD completo para todas as entidades
-- Validações de dados
-- Relacionamentos entre entidades
-- Gestão de taxas e contribuintes
-- Controle financeiro
-- Geração de códigos de barras e QR Code para pagamento 
