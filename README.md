@@ -21,7 +21,7 @@ API REST para gerenciamento de taxas municipais, desenvolvida com Node.js, Expre
 
 1. Clone o repositório:
 ```bash
-git clone [url-do-repositorio]
+git clone []
 ```
 
 2. Instale as dependências:

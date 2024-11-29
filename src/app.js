@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
-const sequelize = require('./config/database');
+const sequelize = process.env.NODE_ENV === 'test' 
+  ? require('./config/database.test')
+  : require('./config/database');
 const routes = require('./routes');
 
 const app = express();
@@ -17,9 +19,12 @@ sequelize.sync({ force: false }).then(() => {
 
 app.use('/api', routes);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
+// Só inicia o servidor se não estiver em ambiente de teste e se for o arquivo principal
+if (process.env.NODE_ENV !== 'test' && require.main === module) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+  });
+}
 
 module.exports = app; 
