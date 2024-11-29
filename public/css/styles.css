@@ -1,0 +1,80 @@
+.content-page {
+    padding: 20px;
+}
+
+.table-responsive {
+    margin-top: 20px;
+}
+
+.action-buttons {
+    white-space: nowrap;
+}
+
+.action-buttons button {
+    margin-right: 5px;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.card {
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.btn-icon {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.modal-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.alert {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.table th {
+    background-color: #f8f9fa;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0,0,0,.075);
+}
+
+.nav-link {
+    cursor: pointer;
+}
+
+.nav-link:hover {
+    color: #fff !important;
+    background-color: rgba(255,255,255,0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+#logout {
+    color: #dc3545;
+}
+
+#logout:hover {
+    color: #fff !important;
+    background-color: #dc3545;
+} 
